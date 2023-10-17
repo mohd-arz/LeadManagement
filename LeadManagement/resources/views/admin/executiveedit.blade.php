@@ -53,6 +53,11 @@
                      @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
                 </label>
             </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Password(Read Only):
+                    <input type="password" name='password' class="form-control" value='{{$executive->password}}' readonly>
+                </label>
+            </div>
 
         
             <div class="form-group mt-4">

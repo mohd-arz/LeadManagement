@@ -8,8 +8,8 @@
     </tr>
         @foreach($executives as $executive)
     <tr>
-        <td>{{$loop->iteration}}</td>
-       <td>{{$executive->name}}</td>
+        <td>{{($executives->currentPage()-1)*$executives->perPage()+$loop->index+1}}</td>
+        <td>{{$executive->name}}</td>
         <td>{{$executive->email}}</td> 
         <td>
             <select name="status" id="{{$executive->id}}" class='text-white bg-gray-800 text-center rounded-md  hover:border-gray-500 leading-tight focus:outline-none focus:shadow-outline'>
@@ -23,6 +23,9 @@
     </tr>
         @endforeach
 </table>
+<div class='p-3'>
+    {{$executives->links()}}
+</div>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
 <script>

@@ -40,14 +40,14 @@ class CrudController extends Controller
             $leads = Lead::where('phone_no',$request->input('phone_no'))->where('phone_code',$request->input('phone_code'))->get();
             if($leads -> isNotEmpty()){
                 Duplicate::create($data);
-                $leads=Lead::where('leads.phone_no',$request->input('phone_no'))->where('leads.phone_code',$request->input('phone_code'))->leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->get();
+                $leads=Lead::where('leads.phone_no',$request->input('phone_no'))->where('leads.phone_code',$request->input('phone_code'))->leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
                 return view('duplicate',compact('leads'));
             }
         }else if($request->input('email')!=null){
             $leads = Lead::where('email',$request->input('email'))->get();
             if($leads -> isNotEmpty()){
                 Duplicate::create($data);
-                $leads=Lead::where('leads.email',$request->input('email'))->leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->get();
+                $leads=Lead::where('leads.email',$request->input('email'))->leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
                 return view('duplicate',compact('leads'));
             }
         }
@@ -102,7 +102,7 @@ class CrudController extends Controller
     public function leadPage(){
         $categories = Category::all();
         $executives = User::whereNot('user_type','admin')->get();
-        $leads=Lead::leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->get();
+        $leads=Lead::leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
         return view('admin.leadsPage',compact('leads','categories','executives'));
     }
 
@@ -279,7 +279,6 @@ class CrudController extends Controller
 
     //Filter by Lower--
     public function filterByLower(Request $request){
-        // $leads = Lead::leftJoin('users','users.id','=','leads.user_id')->orderBy('leads.created_at', 'ASC')->select('leads.*','users.name as executive_name')->get();
         $leads = Lead::leftJoin('users', 'users.id', '=', 'leads.user_id')
         ->orderByRaw('UNIX_TIMESTAMP(leads.created_at) ASC')
         ->select('leads.*', 'users.name as executive_name')

@@ -48,6 +48,10 @@
             </div>
 
             <div class="form-group">
+                <label>(Email or Phone-No)</label>
+            </div>
+            
+            <div class="form-group">
                 <label for="email" class="form-label">Email:
                     <input type="email" name='email' class="form-control" value='{{$lead->email}}'>
                      @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror

@@ -16,7 +16,7 @@ class AuthController extends Controller
         if(Auth::id()){
             $usertype=Auth()->user()->user_type;
             if($usertype=='admin'){
-                $executives=User::where('user_type','!=','admin')->get();
+                $executives=User::where('user_type','!=','admin')->latest()->paginate(10);
                 return view('admin.dashboard',compact('executives'));
             }else if($usertype=='executive'){
                 $leads=Lead::where('user_id',Auth::id())->latest()->paginate(10);

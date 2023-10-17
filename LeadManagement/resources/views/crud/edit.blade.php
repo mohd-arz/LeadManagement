@@ -49,7 +49,7 @@
             </div>
 
             <div class="form-group">
-                <label>Email or Phone-No:</label>
+                <label>(Email or Phone-No)</label>
             </div>
 
             <div class="form-group">

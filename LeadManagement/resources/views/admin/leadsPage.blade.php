@@ -23,9 +23,9 @@
     </select>
 
     <select name="date" id="date" class='text-white bg-gray-800 text-center rounded-md  hover:border-gray-500 leading-tight focus:outline-none focus:shadow-outline m-3'>
-    <option value='all'>--Sort by Created date--</option>
-    <option value="lower">Lower</option>
-    <option value="higher">Higher</option>
+        <option value='all'>--Sort by Created date--</option>
+        <option value="lower">Lower</option>
+        <option value="higher">Higher</option>
     </select>
     <div class="leads-container">
         @include('admin.leads',compact('leads'))

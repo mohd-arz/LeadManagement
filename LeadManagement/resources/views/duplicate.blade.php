@@ -42,8 +42,8 @@
 </table>
 <div>
     <label class='text-white'>Do you wish to Add Duplication :</label>
-    <a href="{{route('addDuplicate')}}" ><button class="btn btn-primary text-white m-3">Yes</button></a>
-    <a href="{{route('rejectDuplicate')}}" ><button class="btn btn-primary text-white m-3">No</button></a>
+    <a href="{{route('addDuplicate')}}" ><button class="btn btn-success text-white m-3">Yes</button></a>
+    <a href="{{route('rejectDuplicate')}}" ><button class="btn btn-danger text-white m-3">No</button></a>
 </div>
 </x-app-layout>
 
