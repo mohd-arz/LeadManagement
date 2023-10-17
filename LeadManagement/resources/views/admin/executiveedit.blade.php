@@ -38,32 +38,36 @@
 <body>
         <h1 class='text-center'>Edit Lead</h1>
         <div class="container d-flex justify-content-center align-items-center">
-        <form action="{{route('editExecutive',$executive->id)}}" method='post' class='form'>
-            @csrf
-            <div class="form-group">
-                <label for="name" class="form-label">Name:
+            <form action="{{route('editExecutive',$executive->id)}}" method='post' class='form'>
+                @csrf
+                <!-- Executive Name -->
+                <div class="form-group">
+                    <label for="name" class="form-label">Name:
                     <input type="text" name='name' class="form-control" value='{{$executive->name}}'>
-                     @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
+                    @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
 
-            <div class="form-group">
-                <label for="email" class="form-label">Email:
+                <!-- Executive Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:
                     <input type="email" name='email' class="form-control" value='{{$executive->email}}'>
-                     @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="email" class="form-label">Password(Read Only):
-                    <input type="password" name='password' class="form-control" value='{{$executive->password}}' readonly>
-                </label>
-            </div>
+                    @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
 
-        
-            <div class="form-group mt-4">
-                <input type="submit" value='Edit Executive' class='btn btn-primary'>
-            </div>
-        </form> 
+                <!-- Executive Password (Read Only) -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Password(Read Only):
+                    <input type="password" name='password' class="form-control" value='{{$executive->password}}' readonly>
+                    </label>
+                </div>
+
+                <!-- Submittion -->
+                <div class="form-group mt-4">
+                    <input type="submit" value='Edit Executive' class='btn btn-primary'>
+                </div>
+            </form> 
         </div>
 </body>
 </html>

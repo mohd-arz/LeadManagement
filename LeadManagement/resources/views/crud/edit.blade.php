@@ -38,63 +38,63 @@
 <body>
         <h1 class='text-center'>Edit Lead</h1>
         <div class="container d-flex justify-content-center align-items-center">
-        <form action="{{route('editLead',$lead->id)}}" method='post' class='form'>
-            @csrf
-            
-            <div class="form-group">
-                <label for="name" class="form-label">Name:
-                    <input type="text" name='name' class="form-control" value='{{$lead->name}}'>
-                     @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label>(Email or Phone-No)</label>
-            </div>
-
-            <div class="form-group">
-                <label for="email" class="form-label">Email:
-                    <input type="email" name='email' class="form-control" value='{{$lead->email}}'>
-                     @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label for="phone_no" class="form-label">Phone No:
-                    <input type="phone_no" name='phone_no' class="form-control" value='{{$lead->phone_no}}'>
-                     @error('phone_no') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-            
-            <div class="form-group">
-                <label for="phone_code" class="form-label">Phone Code:
-                    <input type="phone_code" name='phone_code' class="form-control" value='{{$lead->phone_code}}'>
-                     @error('phone_code') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <select name="category" id="category" class="form-select">
-                    <option>--Select a category--</option>
-                    @foreach($categories as $category)
-                    <option value="{{$category->catergory_type}}" {{$lead->category==$category->catergory_type ? 'selected':''}}>{{$category->catergory_type}}</option>
-                    @endforeach
-                </select>
-                @error('category') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="remark" class="form-label">Remark:
-                <input type="text" name='remark' class="form-control" value='{{$lead->remark}}'>
-                @error('remark') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-            
-            <div class="form-group mt-4">
-                <input type="submit" value='Edit Lead' class='btn btn-primary'>
-            </div>
-        </form> 
+            <form action="{{route('editLead',$lead->id)}}" method='post' class='form'>
+                @csrf
+                <!-- Name -->
+                <div class="form-group">
+                    <label for="name" class="form-label">Name:
+                        <input type="text" name='name' class="form-control" value='{{$lead->name}}'>
+                        @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                <!-- Label for Email or PhoneNo -->
+                <div class="form-group">
+                    <label>(Email or Phone-No)</label>
+                </div>
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:
+                        <input type="email" name='email' class="form-control" value='{{$lead->email}}'>
+                        @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                <!-- PhoneNo -->
+                <div class="form-group">
+                    <label for="phone_no" class="form-label">Phone No:
+                        <input type="phone_no" name='phone_no' class="form-control" value='{{$lead->phone_no}}'>
+                        @error('phone_no') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                <!-- Phone Code -->
+                <div class="form-group">
+                    <label for="phone_code" class="form-label">Phone Code:
+                        <input type="phone_code" name='phone_code' class="form-control" value='{{$lead->phone_code}}'>
+                        @error('phone_code') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                <!-- Category -->
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select name="category" id="category" class="form-select">
+                        <option value=''>--Select a category--</option>
+                        @foreach($categories as $category)
+                        <option value="{{$category->catergory_type}}" {{$lead->category==$category->catergory_type ? 'selected':''}}>{{$category->catergory_type}}</option>
+                        @endforeach
+                    </select>
+                    @error('category') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                </div>
+                <!-- Remark -->
+                <div class="form-group">
+                    <label for="remark" class="form-label">Remark:
+                    <input type="text" name='remark' class="form-control" value='{{$lead->remark}}'>
+                    @error('remark') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                <!-- Submittion -->
+                <div class="form-group mt-4">
+                    <input type="submit" value='Edit Lead' class='btn btn-primary'>
+                </div>
+            </form> 
         </div>
 </body>
 </html>

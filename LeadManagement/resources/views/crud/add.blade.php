@@ -38,48 +38,55 @@
 <body>
         <h1 class='text-center'>Add Lead</h1>
         <div class="container d-flex justify-content-center align-items-center">
-        <form action="{{route('addLead')}}" method='post' class='form'>
-            @csrf
-            <div class="form-group">
-                <label for="name" class="form-label">Name:
-                    <input type="text" name='name' class="form-control" >
-                     @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-            
-            <div class="form-group">
-                <label for="contact_option">Contact Type:</label>
-                <select name="contact_option" id="contact_option" class="form-select">
-                    <option>--Select Contact Option--</option>
-                    <option value="email">Email</option>
-                    <option value="phone">Phone</option>
-                </select>
-            </div>
-            
-            <div class="contact-container"></div>
-            
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <select name="category" id="category" class="form-select">
-                    <option>--Select a category--</option>
-                    @foreach($categories as $category)
-                    <option value="{{$category->catergory_type}}">{{$category->catergory_type}}</option>
-                    @endforeach
-                </select>
-                @error('category') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-            </div>
-            
-            <div class="form-group">
-                <label for="remark" class="form-label">Remark:
-                    <input type="text" name='remark' class="form-control" >
-                     @error('remark') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
-                </label>
-            </div>
-            
-            <div class="form-group mt-4">
-                <input type="submit" value='Add Lead' class='btn btn-primary'>
-            </div>
-        </form> 
+            <form action="{{route('addLead')}}" method='post' class='form'>
+                @csrf
+                <!-- Lead Name -->
+                <div class="form-group">
+                    <label for="name" class="form-label">Name:
+                        <input type="text" name='name' class="form-control" >
+                        @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                
+                <!-- Contact Type -->
+                <div class="form-group">
+                    <label for="contact_option">Contact Type:</label>
+                    <select name="contact_option" id="contact_option" class="form-select">
+                        <option value=''>--Select Contact Option--</option>
+                        <option value="email">Email</option>
+                        <option value="phone">Phone</option>
+                    </select>
+                    @error('contact_option') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                </div>
+                
+                <!-- Contact Type Place -->
+                <div class="contact-container"></div>
+                
+                <!-- Category -->
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select name="category" id="category" class="form-select">
+                        <option value=''>--Select a category--</option>
+                        @foreach($categories as $category)
+                        <option value="{{$category->catergory_type}}">{{$category->catergory_type}}</option>
+                        @endforeach
+                    </select>
+                    @error('category') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                </div>
+                
+                <!-- Remarks -->
+                <div class="form-group">
+                    <label for="remark" class="form-label">Remark:
+                        <input type="text" name='remark' class="form-control" >
+                        @error('remark') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+                    </label>
+                </div>
+                
+                <!-- Submittion -->
+                <div class="form-group mt-4">
+                    <input type="submit" value='Add Lead' class='btn btn-primary'>
+                </div>
+            </form> 
         </div>
 </body>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

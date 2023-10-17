@@ -29,8 +29,8 @@
     <td>{{$lead->category}}</td>   
     <td>{{$lead->remark}}</td>
     <td>
-    <button type="button" class="btn btn-primary bg-blue-600" onclick="window.location.href='{{ route('editLeadPage', $lead->id) }}'">Edit</button>
-    <button type="button" class="btn btn-danger bg-red-700" onclick="confirmAndDelete({{ $lead->id }})">Delete</button>
+        <button type="button" class="btn btn-primary bg-blue-600" onclick="window.location.href='{{ route('editLeadPage', $lead->id) }}'">Edit</button>
+        <button type="button" class="btn btn-danger bg-red-700" onclick="confirmAndDelete({{ $lead->id }})">Delete</button>
     </td>
     </tr>
     @endforeach
@@ -38,6 +38,7 @@
 <div class='p-3'>
     {{$leads->links()}}
 </div>
+<!-- Confirmation before deleting lead -->
 <script>
     function confirmAndDelete(leadId) {
         if (confirm('Are you sure you want to delete this lead?')) {

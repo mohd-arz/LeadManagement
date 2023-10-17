@@ -7,14 +7,21 @@
             {{ __('Admin Dashboard') }}
         </h2>
     </x-slot>   
+
+    <!-- For Messaging -->
     @if(session('message'))
-    <p class="alert alert-success d-inline-block m-4 absolute top-5">{{session('message')}}</p>
+        <p class="alert alert-success d-inline-block m-4 absolute top-5">{{session('message')}}</p>
     @endif
+
+    <!-- For Viewing Leads -->
     <a href="{{route('leadPage')}}" class="btn btn-primary m-3">View Leads</a>
+
+    <!-- For partials Executive -->
     <div class="executives-container">
         @include('admin.executive',compact('executives'))
     </div>
 </x-app-layout>
+<!-- Timeout Message -->
 <script>
      const resultbtn=document.querySelector('.alert');
         setTimeout(() => {

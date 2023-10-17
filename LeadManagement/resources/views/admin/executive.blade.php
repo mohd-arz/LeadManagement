@@ -24,11 +24,14 @@
     </tr>
         @endforeach
 </table>
+
 <div class='p-3'>
     {{$executives->links()}}
 </div>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" ></script>
+<!-- Ajax for Changing Status of a User by Admin -->
 <script>
     jQuery('document').ready(function(){
         jQuery('select').change(function(){

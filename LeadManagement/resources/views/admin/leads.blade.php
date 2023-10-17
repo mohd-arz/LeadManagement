@@ -15,8 +15,8 @@
     <tr>
         <td>{{($leads->currentPage()-1)*$leads->perPage()+$loop->index+1}}</td>
         <td>{{$lead->executive_name}}</td>
-       <td>{{$lead->name}}</td>
-       <td>
+        <td>{{$lead->name}}</td>
+        <td>
             @if($lead->email!=null)
             {{$lead->email}}
             @else
@@ -33,15 +33,17 @@
         <td>{{$lead->created_at}}</td>
         <td>{{$lead->remark}}</td>
         <td>
-        <button type="button" class="btn btn-primary bg-blue-600" onclick="window.location.href='{{ route('editLeadPageAdmin', $lead->id) }}'">Edit</button>
-    <button type="button" class="btn btn-danger bg-red-700" onclick="confirmAndDelete({{ $lead->id }})">Delete</button>
+            <button type="button" class="btn btn-primary bg-blue-600" onclick="window.location.href='{{ route('editLeadPageAdmin', $lead->id) }}'">Edit</button>
+            <button type="button" class="btn btn-danger bg-red-700" onclick="confirmAndDelete({{ $lead->id }})">Delete</button>
         </td>
     </tr>
         @endforeach
 </table>
+
 <div class='p-3'>
     {{$leads->links()}}
 </div>
+<!-- Js for Confirmation of Deletion -->
 <script>
     function confirmAndDelete(leadId) {
         if (confirm('Are you sure you want to delete this lead?')) {

@@ -31,6 +31,7 @@ class CrudController extends Controller
         //Added Basic Validation
         request()->validate([
             'name' => 'required',
+            'contact_option'=>'required',
             'category' => 'required',
             'remark' => 'required',
         ]);
@@ -93,6 +94,9 @@ class CrudController extends Controller
             'name' => 'required',
             'category' => 'required',
             'remark' => 'required',
+            'email' => 'sometimes|required_without:phone_no|email',
+            'phone_no' => 'sometimes|required_without:email',
+            'phone_code' => 'required_with:phone_no'
         ]);
 
         //Getting an appropiate lead and updating it
@@ -132,14 +136,42 @@ class CrudController extends Controller
     /////
     
     //Go To LeadPage by Admin
-    public function leadPage(){
-        $categories = Category::all();
+    public function leadPage(Request $request){
+        // $categories = Category::all();
 
-        //getting every executives except admin
+        // //getting every executives except admin
+        // $executives = User::whereNot('user_type','admin')->get();
+
+        // //Implemented leftJoin with users table to get users_name as executive_name
+        // $leads=Lead::leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
+
+        $category = $request->input('category');
+        $executive = $request->input('executive');
+        $date = $request->input('date');
+        
+
+        $categories = Category::all();
         $executives = User::whereNot('user_type','admin')->get();
 
-        //Implemented leftJoin with users table to get users_name as executive_name
-        $leads=Lead::leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
+    
+        $leads = Lead::leftJoin('users', 'users.id', '=', 'leads.user_id')
+        ->select('leads.*', 'users.name as executive_name')
+        ->when($category != null, function ($q) use ($category) {
+            return $q->where('category', $category);
+        })
+        ->when($executive != null, function ($q) use ($executive) {
+            return $q->where('users.id', $executive);
+        })
+        ->when($date == 'higher', function ($q){
+            return $q->orderByRaw('UNIX_TIMESTAMP(leads.created_at) DESC');
+        })
+        ->when($date == 'lower', function ($q) {
+            return $q->orderByRaw('UNIX_TIMESTAMP(leads.created_at) ASC');
+        })
+        ->latest()
+        ->paginate(10);
+
+
         return view('admin.leadsPage',compact('leads','categories','executives'));
     }
     /////
@@ -156,7 +188,9 @@ class CrudController extends Controller
     public function addLeadAdmin(Request $request){
         request()->validate([
             'name' => 'required',
+            'contact_option'=>'required',
             'category' => 'required',
+            'executive'=>'required',
             'remark' => 'required',
         ]);
         $data = [
@@ -202,7 +236,11 @@ class CrudController extends Controller
         request()->validate([
             'name' => 'required',
             'category' => 'required',
+            'executive'=>'required',
             'remark' => 'required',
+            'email' => 'sometimes|required_without:phone_no|email',
+            'phone_no' => 'sometimes|required_without:email',
+            'phone_code' => 'required_with:phone_no'
         ]);
         $lead=Lead::find($id);
         $lead->update([
@@ -214,7 +252,7 @@ class CrudController extends Controller
             'remark'=>request('remark'),
             'user_id'=>request('executive'),
         ]);
-        return redirect()->route('home')->with('message','Lead Edited Successfully');
+        return redirect()->route('leadPage')->with('message','Lead Edited Successfully');
     }
     /////
 
