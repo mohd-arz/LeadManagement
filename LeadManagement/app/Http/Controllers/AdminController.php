@@ -123,7 +123,7 @@ class AdminController extends Controller
             'category' => 'required',
             'executive'=>'required',
             'remark' => 'required',
-            'email' => 'sometimes|required_without:phone_no|email',
+            'email' => 'sometimes|required_without:phone_no',
             'phone_no' => 'sometimes|required_without:email',
             'phone_code' => 'required_with:phone_no'
         ]);
