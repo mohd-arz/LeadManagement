@@ -9,6 +9,8 @@ use App\Models\Lead;
 use App\Models\Duplicate;
 use App\Models\User;
 
+//Initially Every Funcions and routes are assigned and passed through this only Route--
+
 class CrudController extends Controller
 {
     //Executive//
