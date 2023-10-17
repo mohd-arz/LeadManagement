@@ -1,3 +1,4 @@
+<h1 class='text-2xl text-white text-center mb-3'>Executives</h1>
 <table class="table table-dark table-striped table-hover table-bordered w-4/5 m-auto text-center text-white">
     <tr>
         <th>#</th>
@@ -14,7 +15,7 @@
         <td>
             <select name="status" id="{{$executive->id}}" class='text-white bg-gray-800 text-center rounded-md  hover:border-gray-500 leading-tight focus:outline-none focus:shadow-outline'>
                 <option value="active" {{$executive->status=='active' ? 'selected':''}}>Active</option>
-                <option value="inactive" {{$executive->status=='inactive' ? 'selected':''}}>InActive</option>
+                <option value="inactive" {{$executive->status=='inactive' ? 'selected':''}}>Inactive</option>
             </select>
         </td>
         <td>

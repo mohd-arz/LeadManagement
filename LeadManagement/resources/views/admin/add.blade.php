@@ -60,7 +60,7 @@
             <div class="contact-container"></div>
 
             <div class="form-group">
-            <label for="executive">Executive:</label>
+            <label for="executive">Active Executives:</label>
                 <select name="executive" id="executive" class="form-select">
                     <option>--Select a Executive--</option>
                     @foreach($executives as $executive)

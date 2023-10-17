@@ -41,6 +41,18 @@
         <form action="{{route('editLeadAdmin',$lead->id)}}" method='post' class='form'>
             @csrf
             <div class="form-group">
+            <label for="executive">Change Executive?</label>
+                <select name="executive" id="executive" class="form-select">
+                    <option>--Select a Executive--</option>
+                    @foreach($executives as $executive)
+                    <option value="{{$executive->id}}" {{$executive->id==$lead->user_id ? 'selected':''}}>{{$executive->name}}</option>
+                    @endforeach
+                </select>
+                @error('executive') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
+            </div>
+
+
+            <div class="form-group">
                 <label for="name" class="form-label">Name:
                     <input type="text" name='name' class="form-control" value='{{$lead->name}}'>
                      @error('name') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
@@ -53,34 +65,23 @@
 
             <div class="form-group">
                 <label for="email" class="form-label">Email:
-                    <input type="email" name='email' class="form-control" value='{{$lead->email}}'  {{ $lead->email == null ? 'disabled placeholder=Disabled' : '' }}>
+                    <input type="email" name='email' class="form-control" >
                      @error('email') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
                 </label>
             </div>
 
             <div class="form-group">
                 <label for="phone_no" class="form-label">Phone No:
-                    <input type="phone_no" name='phone_no' class="form-control" value='{{$lead->phone_no}}'  {{ $lead->phone_no == null ? 'disabled placeholder=Disabled' : '' }}>
+                    <input type="phone_no" name='phone_no' class="form-control" >
                      @error('phone_no') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
                 </label>
             </div>
             
             <div class="form-group">
                 <label for="phone_code" class="form-label">Phone Code:
-                    <input type="phone_code" name='phone_code' class="form-control" value='{{$lead->phone_code}}' {{ $lead->phone_code == null ? 'disabled placeholder=Disabled' : '' }}>
+                    <input type="phone_code" name='phone_code' class="form-control" value='{{$lead->phone_code}}' >
                      @error('phone_code') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
                 </label>
-            </div>
-
-            <div class="form-group">
-            <label for="executive">Executive:</label>
-                <select name="executive" id="executive" class="form-select">
-                    <option>--Select a Executive--</option>
-                    @foreach($executives as $executive)
-                    <option value="{{$executive->id}}" {{$executive->id==$lead->user_id ? 'selected':''}}>{{$executive->name}}</option>
-                    @endforeach
-                </select>
-                @error('executive') <p class='alert alert-danger mt-2'>{{$message}}</p> @enderror
             </div>
 
             <div class="form-group">

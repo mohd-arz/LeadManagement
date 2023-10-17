@@ -6,7 +6,8 @@
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Duplicates ') }}
         </h2>
-    </x-slot>   
+    </x-slot>  
+    <h1 class='text-2xl text-white text-center mb-3'>Duplicate Leads</h1>
     <table class="table table-dark table-striped table-hover table-bordered w-4/5 m-auto text-center text-white">
     <tr>
         <th>#</th>

@@ -1,3 +1,4 @@
+<h1 class='text-2xl text-white text-center mb-3'>Leads</h1>
 <table class="table table-dark table-striped table-hover table-bordered w-4/7 m-auto text-center text-white">
     <tr>
         <th>#</th>
