@@ -7,6 +7,10 @@ use App\Models\Category;
 use App\Models\Lead;
 use App\Models\User;
 
+// 
+use Illuminate\Support\Facades\DB;
+
+
 class AdminController extends Controller
 {
     //Admin
@@ -22,36 +26,41 @@ class AdminController extends Controller
     
     //Go To LeadPage by Admin
     public function leadPage(Request $request){
-        // $categories = Category::all();
-
-        // //getting every executives except admin
-        // $executives = User::whereNot('user_type','admin')->get();
-
-        // //Implemented leftJoin with users table to get users_name as executive_name
-        // $leads=Lead::leftJoin('users','users.id','=','leads.user_id')->select('leads.*','users.name as executive_name')->latest()->paginate(10);
-
         $category = $request->input('category');
         $executive = $request->input('executive');
-        $date = $request->input('date');
-        
-
+        $date_filter=$request->input('date_filter');
+        $date_range=$request->input('date_range');
+       
         $categories = Category::all();
         $executives = User::whereNot('user_type','admin')->get();
 
-    
+
         $leads = Lead::leftJoin('users', 'users.id', '=', 'leads.user_id')
-        ->select('leads.*', 'users.name as executive_name')
+        ->select('leads.*', 'users.name as executive_name','users.status as user_status')
         ->when($category != null, function ($q) use ($category) {
             return $q->where('category', $category);
         })
         ->when($executive != null, function ($q) use ($executive) {
             return $q->where('users.id', $executive);
         })
-        ->when($date == 'higher', function ($q){
-            return $q->orderByRaw('UNIX_TIMESTAMP(leads.created_at) DESC');
+        ->when($date_range != null && $date_range != 'custom', function($q) use($date_range){
+            $today = now()->format('Y-m-d');
+            if($date_range=='today'){
+                return $q->whereDate('leads.created_at',$today);
+            }
+            if($date_range=='last_three_days'){
+                $threeDays=now()->subDays(3)->format('Y-m-d');
+                return $q->whereBetween(DB::raw('DATE(leads.created_at)'), [$threeDays, $today]);
+            }else if($date_range=='last_week'){
+                $sevenDays=now()->subDays(7)->format('Y-m-d');
+                return $q->whereBetween(DB::raw('DATE(leads.created_at)'), [$sevenDays, $today]);
+            }else if($date_range=='last_month'){
+                $lastMonth = now()->subMonth()->format('Y-m-d');
+                return $q->whereBetween(DB::raw('DATE(leads.created_at)'),[$lastMonth,$today]);
+            }
         })
-        ->when($date == 'lower', function ($q) {
-            return $q->orderByRaw('UNIX_TIMESTAMP(leads.created_at) ASC');
+        ->when($date_filter != null, function($q) use($date_filter){
+            return $q->orWhereDate('leads.created_at',$date_filter);
         })
         ->latest()
         ->paginate(10);

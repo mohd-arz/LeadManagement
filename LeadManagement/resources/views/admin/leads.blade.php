@@ -14,7 +14,13 @@
         @foreach($leads as $lead)
     <tr>
         <td>{{($leads->currentPage()-1)*$leads->perPage()+$loop->index+1}}</td>
-        <td>{{$lead->executive_name}}</td>
+        <td>
+            @if($lead->user_status == 'active')
+                {{$lead->executive_name}}
+            @else
+                {{$lead->executive_name}} ({{$lead->user_status}})
+            @endif
+        </td>
         <td>{{$lead->name}}</td>
         <td>
             @if($lead->email!=null)
@@ -30,7 +36,7 @@
             @endif
         </td>
         <td>{{$lead->category}}</td>   
-        <td>{{$lead->created_at}}</td>
+        <td>{{$lead->created_at->format('d-m-Y')}}</td>
         <td>{{$lead->remark}}</td>
         <td>
             <button type="button" class="btn btn-primary bg-blue-600" onclick="window.location.href='{{ route('editLeadPageAdmin', $lead->id) }}'">Edit</button>
